@@ -53,4 +53,14 @@ function create_postTypes() {
 add_action('init', 'create_postTypes' )
 
 
+/**
+ * Flush rewrite rules to make custom ULRs active
+ */
+function wpcampuscpt_rewrite_flush() {
+    create_postTypes(); //
+    flush_rewrite_rules();
+}
+register_activation_hook( __FILE__, 'wpcampuscpt_rewrite_flush' );
+
+
  ?>
