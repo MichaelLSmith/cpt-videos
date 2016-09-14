@@ -32,35 +32,55 @@ function create_postTypes() {
 
 	// CPT Options
 	$args = array(
-			'labels'             => $labels,
-	        'description'        => __( 'Description.', 'movementmedia' ),
-			'public'             => true,
-			'publicly_queryable' => true,
-			'show_ui'            => true,
-			'show_in_menu'       => true,
-			'query_var'          => true,
-			'rewrite'            => array( 'slug' => 'video' ),
-			'capability_type'    => 'post',
-			'has_archive'        => true,
-			'hierarchical'       => false,
-			'menu_position'      => null,
-			'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' )
+			'labels'             	=> $labels,
+	        'description'        	=> __( 'Description.', 'movementmedia' ),
+			'public'             	=> true,
+			'publicly_queryable'	=> true,
+			'show_ui'           	=> true,
+			'show_in_menu'      	=> true,
+			'query_var'         	=> true,
+			'rewrite'           	=> array( 'slug' => 'videos' ),
+			'capability_type'   	=> 'post',
+			'has_archive'       	=> true,
+			'hierarchical'      	=> false,
+			'menu_position'     	=> 5,
+			'menu_icon'				=> 'dashicons-format-video',
+			'supports'           	=> array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' )
 		);
 
 	register_post_type( 'movementmedia_videos', $args );
 }
 
-add_action('init', 'create_postTypes' )
-
+add_action('init', 'create_postTypes' );
 
 /**
  * Flush rewrite rules to make custom ULRs active
  */
-function wpcampuscpt_rewrite_flush() {
+function movementmedia_rewrite_flush() {
     create_postTypes(); //
     flush_rewrite_rules();
 }
-register_activation_hook( __FILE__, 'wpcampuscpt_rewrite_flush' );
+register_activation_hook( __FILE__, 'movementmedia_rewrite_flush' );
+
+/* Custom Taxonomies */
+
+function custom_taxonomies(){
+	/* Client Name */
+	register_taxonomy(
+		//name of taxonomy
+		'client-name',
+		//which post type it applies to:
+		'movementmedia_videos',
+		array(
+			'label'			=> 'Client',
+			'rewrite'		=> array( 'slug' => 'client'),
+			'hierarchical'	=> true
+		)
+	);
+}
+
+add_action( 'init', 'custom_taxonomies');
+
 
 
  ?>
