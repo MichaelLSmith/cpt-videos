@@ -66,6 +66,35 @@ register_activation_hook( __FILE__, 'movementmedia_rewrite_flush' );
 
 function custom_taxonomies(){
 	/* Client Name */
+	$labels = array(
+	'name'                       => _x( 'Clients', 'taxonomy general name', 'movementmedia' ),
+	'singular_name'              => _x( 'Client', 'taxonomy singular name', 'movementmedia' ),
+	'search_items'               => __( 'Search Clients', 'movementmedia' ),
+	'popular_items'              => __( 'Popular Clients', 'movementmedia' ),
+	'all_items'                  => __( 'All Clients', 'movementmedia' ),
+	'parent_item'                => null,
+	'parent_item_colon'          => null,
+	'edit_item'                  => __( 'Edit Client', 'movementmedia' ),
+	'update_item'                => __( 'Update Client', 'movementmedia' ),
+	'add_new_item'               => __( 'Add New Client', 'movementmedia' ),
+	'new_item_name'              => __( 'New Client Name', 'movementmedia' ),
+	'separate_items_with_commas' => __( 'Separate Clients with commas', 'movementmedia' ),
+	'add_or_remove_items'        => __( 'Add or remove Clients', 'movementmedia' ),
+	'choose_from_most_used'      => __( 'Choose from the most used Clients', 'movementmedia' ),
+	'not_found'                  => __( 'No Clients found.', 'movementmedia' ),
+	'menu_name'                  => __( 'Clients', 'movementmedia' ),
+	);
+
+	$args = array(
+		'hierarchical'          => false,
+		'labels'                => $labels,
+		'show_ui'               => true,
+		'show_admin_column'     => true,
+		'update_count_callback' => '_update_post_term_count',
+		'query_var'             => true,
+		'rewrite'               => array( 'slug' => 'Client' ),
+	);
+
 	register_taxonomy(
 		//name of taxonomy
 		'client-name',
