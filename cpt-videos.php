@@ -45,7 +45,8 @@ function create_postTypes() {
 			'hierarchical'      	=> false,
 			'menu_position'     	=> 5,
 			'menu_icon'				=> 'dashicons-format-video',
-			'supports'           	=> array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' )
+			'supports'           	=> array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
+			'taxonomies'   			=> array( 'movementmedia_videos',  'post_tag' ),
 		);
 
 	register_post_type( 'movementmedia_videos', $args );
@@ -65,7 +66,7 @@ function movementmedia_add_custom_types( $query ) {
         $query->set( 'post_type', $post_types );
     }
 }
-add_filter( 'pre_get_posts', 'movementmedia_add_custom_types' );
+// add_filter( 'pre_get_posts', 'movementmedia_add_custom_types' );
 
 
 /**
