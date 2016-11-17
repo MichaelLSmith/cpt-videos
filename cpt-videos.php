@@ -53,6 +53,21 @@ function create_postTypes() {
 
 add_action('init', 'create_postTypes' );
 
+function movementmedia_add_custom_types( $query ) {
+    if( is_tag() && $query->is_main_query() ) {
+
+        // this gets all post types:
+        $post_types = get_post_types();
+
+        // alternately, you can add just specific post types using this line instead of the above:
+        // $post_types = array( 'post', 'your_custom_type' );
+
+        $query->set( 'post_type', $post_types );
+    }
+}
+add_filter( 'pre_get_posts', 'movementmedia_add_custom_types' );
+
+
 /**
  * Flush rewrite rules to make custom ULRs active
  */
