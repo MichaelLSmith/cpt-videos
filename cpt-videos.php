@@ -66,7 +66,7 @@ function movementmedia_add_custom_types( $query ) {
         $query->set( 'post_type', $post_types );
     }
 }
-// add_filter( 'pre_get_posts', 'movementmedia_add_custom_types' );
+add_filter( 'pre_get_posts', 'movementmedia_add_custom_types' );
 
 
 /**
