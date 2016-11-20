@@ -45,8 +45,8 @@ function create_postTypes() {
 			'hierarchical'      	=> false,
 			'menu_position'     	=> 5,
 			'menu_icon'				=> 'dashicons-format-video',
-			'supports'           	=> array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
-			'taxonomies'   			=> array( 'movementmedia_videos',  'post_tag' ),
+			'supports'           	=> array( 'title', 'editor', 'author', 		'thumbnail', 'excerpt', 'comments' ),
+			'taxonomies'   			=> array( 'movementmedia_videos',  'post_tag', 'category' ),
 		);
 
 	register_post_type( 'movementmedia_videos', $args );
@@ -102,7 +102,7 @@ function custom_taxonomies(){
 	);
 
 	$args = array(
-		'hierarchical'          => false,
+		'hierarchical'          => true,
 		'labels'                => $labels,
 		'show_ui'               => true,
 		'show_admin_column'     => true,
@@ -115,12 +115,13 @@ function custom_taxonomies(){
 		//name of taxonomy
 		'client-name',
 		//which post type it applies to:
-		'movementmedia_videos',
-		array(
-			'label'			=> 'Client',
-			'rewrite'		=> array( 'slug' => 'client'),
-			'hierarchical'	=> true
-		)
+		array('movementmedia_videos', 'post'),
+		$args
+		// array(
+		// 	'label'			=> 'Client',
+		// 	'rewrite'		=> array( 'slug' => 'client'),
+		// 	'hierarchical'	=> true
+		// )
 	);
 }
 
